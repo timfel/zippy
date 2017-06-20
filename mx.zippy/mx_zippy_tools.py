@@ -100,6 +100,24 @@ def _extract_zippy_internal_options(args):
         elif arg == '-trace-generator-peeling':
             internal += ["-Dedu.uci.python.TraceGeneratorInlining=true"               ] # false
 
+        elif arg == '-dump':
+            internal += ['-Dgraal.Dump']
+            internal += ['-Dgraal.TruffleBackgroundCompilation=false']
+            internal += ['-Dgraal.TraceTruffleCompilation=true']
+            internal += ['-Dgraal.TraceTruffleCompilationDetails=true']
+
+        elif arg == '-disassemble':
+            #internal += ['-Dgraal.TruffleBackgroundCompilation=false']
+            #internal += ['-Dgraal.TraceTruffleCompilation=true']
+            internal += ['-Dgraal.TraceTruffleCompilation=true']
+            #internal += ['-Dgraal.TraceTruffleCompilationDetails=true']
+            #internal += ['-XX:+BootstrapJVMCI']
+            #internal += ['-XX:-TieredCompilation']
+            internal += ['-XX:CompileCommand=print,*Node.updateUsages']
+            #internal += ['-XX:CompileCommand=print,*OptimizedCallTarget.CallRoot']
+            #internal += ['-XX:+UnlockDiagnosticVMOptions']
+            #internal += ['-XX:+PrintAssembly']
+
         # Other
         elif arg == '-force-long':
                 internal += ["-Dedu.uci.python.forceLongType=true"                        ] # false
